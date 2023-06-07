@@ -33,6 +33,8 @@ int main()
 }
 //SELECTION SORT
 //FIND THE MINIMUM ELEM IN THE UNSORTED ARRAY AND SWAP IT WITH THE ELEM AT THE BEGINNING
+/*i..............n-1
+ j=i+1............n*/
 #include <iostream>
 using namespace std;
 int main()
