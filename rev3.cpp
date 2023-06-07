@@ -74,6 +74,12 @@ int main()
     }
     int maxNo=INT_MIN; //zaise hi koi no max se bada 
     int minNo=INT_MAX; //aur min se kam milta hai use update kr denge
+    /*initializing the variables maxNo with INT_MIN (the smallest possible value for an integer) 
+    and minNo with INT_MAX (the largest possible value for an integer)
+    initializing maxNo with INT_MIN, we ensure that any element in the array will be greater than maxNo initially. 
+    This allows us to compare the elements in the array and update maxNo whenever we encounter a larger value.
+    By initializing minNo with INT_MAX, we ensure that any element in the array will be smaller than minNo initially. 
+    This allows us to compare the elements in the array and update minNo whenever we encounter a smaller value.*/
     for(int i=0;i<n;i++){
         maxNo=max(maxNo,arr[i]);
         minNo=min(minNo,arr[i]);
