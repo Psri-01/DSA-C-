@@ -94,27 +94,30 @@ int main()
     return 0;
 }
 //LINEAR SEARCH IN ARRAYS
-#include <iostream>
-#include<climits>
+#include <bits/stdc++.h>
 using namespace std;
-int linearSearch(int arr[],int n,int key){
+int linearSearch(int arr[], int n,int key){
     for(int i=0;i<n;i++){
         if(arr[i]==key){
+            cout<<"The corresponding array index is: "<<endl;
             return i;
         }
     }
     return -1;
 }
+
 int main()
 {
     int n;
-    cout<<"Enter array size: ";
+    cout<<"Enter the size of the array: "<<endl;
     cin>>n;
     int arr[n];
+    cout<<"Enter the array elements: "<<endl;
     for(int i=0;i<n;i++){
         cin>>arr[i];
     }
     int key;
+    cout<<"Enter the key to be found in the array: "<<endl;
     cin>>key;
     cout<<linearSearch(arr,n,key)<<endl;
     return 0;
