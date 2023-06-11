@@ -1,55 +1,89 @@
-#include<iostream>
-#include<queue>
-#define NODE 6
+// C++ code to print BFS traversal from a given
+// source vertex
+
+#include <bits/stdc++.h>
 using namespace std;
-typedef struct node{
-   int val;
-   int state; //status
-}node;
-int graph[NODE][NODE] = {
-   {0, 1, 1, 1, 0, 0},
-   {1, 0, 0, 1, 1, 0},
-   {1, 0, 0, 1, 0, 1},
-   {1, 1, 1, 0, 1, 1},
-   {0, 1, 0, 1, 0, 1},
-   {0, 0, 1, 1, 1, 0}
+
+// This class represents a directed graph using
+// adjacency list representation
+class Graph {
+
+	// No. of vertices
+	int V;
+
+	// Pointer to an array containing adjacency lists
+	vector<list<int> > adj;
+
+public:
+	// Constructor
+	Graph(int V);
+
+	// Function to add an edge to graph
+	void addEdge(int v, int w);
+
+	// Prints BFS traversal from a given source s
+	void BFS(int s);
 };
-void bfs(node *vert, node s){
-   node u;
-   int i, j;
-   queue<node> que;
-   for(i = 0; i<NODE; i++){
-      vert[i].state = 0; //not visited
-   }
-   vert[s.val].state = 1;//visited
-   que.push(s); //insert starting node
-   while(!que.empty()){
-      u = que.front(); //delete from queue and print
-      que.pop();
-      cout << char(u.val+'A') << " ";
-      for(i = 0; i<NODE; i++){
-         if(graph[i][u.val]){
-            //when the node is non-visited
-            if(vert[i].state == 0){
-               vert[i].state = 1;
-               que.push(vert[i]);
-            }
-         }
-      }
-      u.state = 2;//completed for node u
-   }
+
+Graph::Graph(int V)
+{
+	this->V = V;
+	adj.resize(V);
 }
-int main(){
-   node vertices[NODE];
-   node start;
-   char s;
-   for(int i = 0; i<NODE; i++){
-      vertices[i].val = i;
-   }
-   s = 'B';//starting vertex B
-   start.val = s-'A';
-   cout << "BFS Traversal: ";
-   bfs(vertices, start);
-   cout << endl;
+
+void Graph::addEdge(int v, int w)
+{
+	// Add w to v’s list.
+	adj[v].push_back(w);
 }
-//BFS Traversal: B A D E C F
+
+void Graph::BFS(int s)
+{
+	// Mark all the vertices as not visited
+	vector<bool> visited;
+	visited.resize(V, false);
+
+	// Create a queue for BFS
+	list<int> queue;
+
+	// Mark the current node as visited and enqueue it
+	visited[s] = true;
+	queue.push_back(s);
+
+	while (!queue.empty()) {
+
+		// Dequeue a vertex from queue and print it
+		s = queue.front();
+		cout << s << " ";
+		queue.pop_front();
+
+		// Get all adjacent vertices of the dequeued
+		// vertex s.
+		// If an adjacent has not been visited,
+		// then mark it visited and enqueue it
+		for (auto adjacent : adj[s]) {
+			if (!visited[adjacent]) {
+				visited[adjacent] = true;
+				queue.push_back(adjacent);
+			}
+		}
+	}
+}
+
+// Driver code
+int main()
+{
+	// Create a graph given in the above diagram
+	Graph g(4);
+	g.addEdge(0, 1);
+	g.addEdge(0, 2);
+	g.addEdge(1, 2);
+	g.addEdge(2, 0);
+	g.addEdge(2, 3);
+	g.addEdge(3, 3);
+
+	cout << "Following is Breadth First Traversal "
+		<< "(starting from vertex 2) \n";
+	g.BFS(2);
+	return 0;
+}
