@@ -1,57 +1,60 @@
-#include<iostream>
-#include<stack>
+// C++ program to print DFS traversal from
+// a given vertex in a given graph
+#include <bits/stdc++.h>
 using namespace std;
-#define NODE 6
-typedef struct node{
-   int val;
-   int state; //status
-}node;
-int graph[NODE][NODE] = {
-   {0, 1, 1, 1, 0, 0},
-   {1, 0, 0, 1, 1, 0},
-   {1, 0, 0, 1, 0, 1},
-   {1, 1, 1, 0, 1, 1},
-   {0, 1, 0, 1, 0, 1},
-   {0, 0, 1, 1, 1, 0}
+
+// Graph class represents a directed graph
+// using adjacency list representation
+class Graph {
+public:
+	map<int, bool> visited;
+	map<int, list<int> > adj;
+
+	// Function to add an edge to graph
+	void addEdge(int v, int w);
+
+	// DFS traversal of the vertices
+	// reachable from v
+	void DFS(int v);
 };
-void dfs(node *vertex, node start){
-   node u;
-   stack<node> myStack;
-   for(int i = 0; i<NODE; i++){
-      vertex[i].state = 0;//not visited
-      }
-   myStack.push(start);
-      while(!myStack.empty()){
-         //pop and print node
-         u = myStack.top();
-         myStack.pop();
-         cout << char(u.val+'A') << " ";
-         if(u.state != 1){
-            //update vertex status to visited
-            u.state = 1;
-            vertex[u.val].state = 1;
-            for(int i = 0; i<NODE; i++){
-            if(graph[i][u.val]){
-               if(vertex[i].state == 0){
-                  myStack.push(vertex[i]);
-                  vertex[i].state = 1;
-               }  
-            }
-         }
-      }
-   }
+
+void Graph::addEdge(int v, int w)
+{
+	// Add w to v’s list.
+	adj[v].push_back(w);
 }
-int main(){
-   node vertices[NODE];
-   node start;
-   char s;
-   for(int i = 0; i<NODE; i++){
-      vertices[i].val = i;
-   }
-   s = 'C';//starting vertex C
-   start.val = s-'A';
-   cout << "DFS Traversal: ";
-   dfs(vertices, start);
-   cout << endl;
+
+void Graph::DFS(int v)
+{
+	// Mark the current node as visited and
+	// print it
+	visited[v] = true;
+	cout << v << " ";
+
+	// Recur for all the vertices adjacent
+	// to this vertex
+	list<int>::iterator i;
+	for (i = adj[v].begin(); i != adj[v].end(); ++i)
+		if (!visited[*i])
+			DFS(*i);
 }
-//DFS Traversal: C F E B D A
+
+// Driver code
+int main()
+{
+	// Create a graph given in the above diagram
+	Graph g;
+	g.addEdge(0, 1);
+	g.addEdge(0, 2);
+	g.addEdge(1, 2);
+	g.addEdge(2, 0);
+	g.addEdge(2, 3);
+	g.addEdge(3, 3);
+
+	cout << "Following is Depth First Traversal"
+			" (starting from vertex 2) \n";
+
+	// Function call
+	g.DFS(2);
+	return 0;
+}
