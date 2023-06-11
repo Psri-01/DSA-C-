@@ -168,3 +168,25 @@ int main()
   cout<<n<<endl;
   return 0;
 }
+
+//ADAM NUMBER
+#include <iostream>
+using namespace std;
+int reverseDigits(int num) {
+   int rev = 0;
+   while (num > 0) {
+      rev = rev * 10 + num % 10;
+      num /= 10;
+   }
+   return rev;
+}
+int main() {
+   int num = 31;
+   cout<<num<<" is ";
+   int rev = reverseDigits(num);
+   if ( (num*num) == (reverseDigits(rev*rev)) )
+      cout << "Adam Number";
+   else
+      cout << "not an Adam Number";
+   return 0;
+}
