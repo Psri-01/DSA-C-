@@ -1,57 +1,57 @@
-
-#include <bits/stdc++.h>
+#include<iostream>
+#include<stack>
 using namespace std;
-
-const int N=1e5+2;
-bool vis[N];
-vector<int> adj[N];
-
-void dfs(int node)
-{
-    //preorder
-    vis[node]=1;
-    //cout<<node<<" ";
-    //inorder
-    vector<int> :: iterator it;
-    for(it=adj[node].begin();it!=adj[node].end();it++)
-    {
-        if(vis[*it]);
-        else
-        {
-            dfs(*it);
-        }
-    }
-    //postorder
-    cout<<node<<" ";
+#define NODE 6
+typedef struct node{
+   int val;
+   int state; //status
+}node;
+int graph[NODE][NODE] = {
+   {0, 1, 1, 1, 0, 0},
+   {1, 0, 0, 1, 1, 0},
+   {1, 0, 0, 1, 0, 1},
+   {1, 1, 1, 0, 1, 1},
+   {0, 1, 0, 1, 0, 1},
+   {0, 0, 1, 1, 1, 0}
+};
+void dfs(node *vertex, node start){
+   node u;
+   stack<node> myStack;
+   for(int i = 0; i<NODE; i++){
+      vertex[i].state = 0;//not visited
+      }
+   myStack.push(start);
+      while(!myStack.empty()){
+         //pop and print node
+         u = myStack.top();
+         myStack.pop();
+         cout << char(u.val+'A') << " ";
+         if(u.state != 1){
+            //update vertex status to visited
+            u.state = 1;
+            vertex[u.val].state = 1;
+            for(int i = 0; i<NODE; i++){
+            if(graph[i][u.val]){
+               if(vertex[i].state == 0){
+                  myStack.push(vertex[i]);
+                  vertex[i].state = 1;
+               }  
+            }
+         }
+      }
+   }
 }
-
-int main()
-{
-    int n,m;
-    cin>>n>>m;
-    //visited array 
-    for(int i=0;i<=n;i++)
-        vis[i]=false;
-    int x,y;
-    for(int i=0;i<m;i++)
-    {
-        cin>>x>>y;
-        adj[x].push_back(y);
-        adj[y].push_back(x);
-    }
-    dfs(1);
-    return 0;
+int main(){
+   node vertices[NODE];
+   node start;
+   char s;
+   for(int i = 0; i<NODE; i++){
+      vertices[i].val = i;
+   }
+   s = 'C';//starting vertex C
+   start.val = s-'A';
+   cout << "DFS Traversal: ";
+   dfs(vertices, start);
+   cout << endl;
 }
-
-Input
-7 7
-1 2
-1 3                 1
-2 4              2    3
-2 5            4  5  6  7
-2 6
-2 7
-7 3
-Output
-preorder: 1 2 4 5 6 7 3
-postorder: 4 5 6 3 7 2 1
+//DFS Traversal: C F E B D A
