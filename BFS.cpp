@@ -1,60 +1,54 @@
-#include <bits/stdc++.h>
+#include<iostream>
+#include<queue>
+#define NODE 6
 using namespace std;
-
-const int N = 1e5+2;
-bool vis[N];    //visited array
-vector<int>adj[N];  //adjacency list 
-
-int main()
-{
-    for(int i=0;i<N;i++)
-        vis[i]=0;
-    int n,m;
-    cin>>n>>m;
-    int x,y;
-    for(int i=0;i<m;i++)
-    {
-        cin>>x>>y;
-        adj[x].push_back(y);
-        adj[y].push_back(x);
-    }
-    
-    queue<int> q;
-    q.push(1);
-    vis[1]=true;
-    while(!q.empty())
-    {
-        int node=q.front();
-        q.pop();
-        cout<<node<<endl;
-        vector<int>::iterator it;
-        for(it=adj[node].begin();it!=adj[node].end();it++)
-        {
-            if(!vis[*it])
-            {
-                vis[*it]=1;
-                q.push(*it);
+typedef struct node{
+   int val;
+   int state; //status
+}node;
+int graph[NODE][NODE] = {
+   {0, 1, 1, 1, 0, 0},
+   {1, 0, 0, 1, 1, 0},
+   {1, 0, 0, 1, 0, 1},
+   {1, 1, 1, 0, 1, 1},
+   {0, 1, 0, 1, 0, 1},
+   {0, 0, 1, 1, 1, 0}
+};
+void bfs(node *vert, node s){
+   node u;
+   int i, j;
+   queue<node> que;
+   for(i = 0; i<NODE; i++){
+      vert[i].state = 0; //not visited
+   }
+   vert[s.val].state = 1;//visited
+   que.push(s); //insert starting node
+   while(!que.empty()){
+      u = que.front(); //delete from queue and print
+      que.pop();
+      cout << char(u.val+'A') << " ";
+      for(i = 0; i<NODE; i++){
+         if(graph[i][u.val]){
+            //when the node is non-visited
+            if(vert[i].state == 0){
+               vert[i].state = 1;
+               que.push(vert[i]);
             }
-        }
-    }
-    return 0;
+         }
+      }
+      u.state = 2;//completed for node u
+   }
 }
-
-/*INPUT
-7 7
-1 2
-1 3
-2 4
-2 5
-2 6
-2 7
-7 3
-OUTPUT                  1
-1                     2   3
-2                   4  5 6  7
-3
-4
-5
-6
-7
-*/
+int main(){
+   node vertices[NODE];
+   node start;
+   char s;
+   for(int i = 0; i<NODE; i++){
+      vertices[i].val = i;
+   }
+   s = 'B';//starting vertex B
+   start.val = s-'A';
+   cout << "BFS Traversal: ";
+   bfs(vertices, start);
+   cout << endl;
+}
