@@ -190,3 +190,194 @@ int main() {
       cout << "not an Adam Number";
    return 0;
 }
+
+//C++ Program to Display Prime Numbers Between Two Intervals
+#include <iostream>
+using namespace std;
+int main() {
+  int low, high, i;
+  bool is_prime = true;
+  cout << "Enter two numbers (intervals): ";
+  cin >> low >> high;
+  cout << "\nPrime numbers between " << low << " and " << high << " are: " << endl;
+  while (low < high) {
+    is_prime = true;
+    // 0 and 1 are not prime numbers
+    if (low == 0 || low == 1) {
+      is_prime = false;
+    } 
+    for (i = 2; i <= low/2; ++i) {
+      if (low % i == 0) {
+        is_prime = false;
+        break;
+      }
+    }        
+    if (is_prime)
+      cout << low << ", ";
+    ++low;
+  }
+  return 0;
+}
+
+/*A Kaprekar number is a number whose square when divided into two parts and such that sum of parts is 
+equal to the original number and none of the parts has value 0. ex: 297 297^2 = 88209 => 88 + 209 = 297 
+=> Kaprekar number 45 45^2=2025 => 20+25 = 45 => Kaprekar Number*/
+Kaprekar number
+#include<iostream>
+using namespace std;
+int power1(int);
+int isKaprekar(int);
+int main() 
+{
+    int num ;
+    cin>>num;
+    if(isKaprekar(num)) 
+    cout<<"YES";
+    else 
+    cout<<"NO";
+    return 0 ;
+}
+int power1(int num)
+{
+    int power ;
+    power = 1 ;
+    while(num/power )
+    power *= 10;
+    return power;
+}
+int isKaprekar(int num) 
+{ 
+    int sq , part1 , part2 , power;
+    power = power1(num);
+    sq = num * num;
+    part1 = sq / power;
+    part2 = sq % power ;
+    if( part1 + part2 == num) 
+    return 1;
+    else 
+    {
+        power *= 10;
+        part1 = sq / power;
+        part2 = sq % power ;
+        if(part1 + part2 == num)
+        return 1;
+    }
+    return 0;
+}
+
+//no of words in a str python
+string="Help me wash my bag";
+wordC=len(string.split())
+print(wordC)
+    
+/*Happy Number or Not .Find Sum of square of individual digits until the number reaches single digit,
+if the number is 1 it is Happy number, if it reaches 4 it is Not a Happy number.  ex: 86 8^2+6^2= 64+36=100 1^2+0^2+0^2=1+0+0=1 Happy number*/
+#include<iostream>
+using namespace std;
+int main()
+{
+    int digit; int num; int temp; int sum=0;
+    cin>>num;
+    while(sum!=1&&sum!=4)
+    {
+        sum=0;
+        while(num>0)
+        {
+            digit=num%10;
+            sum+=(digit*digit);
+            num=num/10;
+            }
+            num=sum;
+            }
+            if(sum==1)
+            cout<<"Happy Number"<<endl;
+            else
+            cout<<"UnHappy Number"<<endl;
+            return 0;
+    
+}
+
+//Given an integer as input, swap the digits alternately.
+#include<iostream>
+using namespace std;
+int main(){  
+    int n;int count=0;int safe;int digit;int digits;int swap;int power=1;int ans=0;
+    cin>>n;
+    safe=n; 
+    while(n){
+        count++;
+        n/=10;
+        }
+        n=safe;
+        if(count%2==1){
+            digit=n%10;
+            n/=10;
+            }
+            while(n)
+            {
+                digits=n%100;
+                swap=(digits%10)*10+(digits/10);
+                ans=ans+(swap*power);
+                power*=100;
+                n/=100;
+                }
+            if(count%2==1)
+            cout<<ans*10+digit<<endl;
+            else
+            cout<<ans<<endl;
+            return 0;    
+}
+
+//Given a number, preserve the first occurrence of the digit and remove the duplicate occurrences of the same digit. Start reading the digits from left to right.
+#include<iostream>
+using namespace std;
+int main()
+{  
+    int digit[10]={0};
+    int n; int pv=1;  
+    cin>>n;  
+    while(n/pv)  
+    pv=pv*10;  
+    pv=pv/10;  
+    while(pv!=0)
+    {    
+        if(digit[(n/pv)%10]==0)    
+        {      
+            digit[(n/pv)%10]++;      
+            pv=pv/10;      
+            continue;    
+            
+        }    
+        int rem=n%pv;    
+        n=(n/pv)/10;    
+        n=(n*pv)+rem;    
+        pv=pv/10;  
+        
+    }  
+    cout<<n;  
+    return 0;
+}
+
+//Python 3 program to remove repeated digits
+def removeRecur(n):	
+	// Store first digits as previous digit
+	prev_digit = n % 10
+	// Initialize power
+	pow = 10
+	res = prev_digit
+	// Iterate through all digits of n, note that the digits are processed from least significant digit to most significant digit.
+	while (n):		
+		// Store current digit
+		curr_digit = n % 10
+		if (curr_digit != prev_digit):		
+			//Add the current digit to the beginning of result
+			res += curr_digit * pow
+			// Update previous result and power
+			prev_digit = curr_digit
+			pow *= 10
+		// Remove last digit from n
+		n = int(n / 10)
+	return res
+if _name_ == '_main_':
+	n = 12224
+	print(removeRecur(n))        
