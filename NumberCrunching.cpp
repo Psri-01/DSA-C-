@@ -358,26 +358,88 @@ int main()
     return 0;
 }
 
-//Python 3 program to remove repeated digits
-def removeRecur(n):	
-	// Store first digits as previous digit
-	prev_digit = n % 10
-	// Initialize power
-	pow = 10
-	res = prev_digit
-	// Iterate through all digits of n, note that the digits are processed from least significant digit to most significant digit.
-	while (n):		
-		// Store current digit
-		curr_digit = n % 10
-		if (curr_digit != prev_digit):		
-			//Add the current digit to the beginning of result
-			res += curr_digit * pow
-			// Update previous result and power
-			prev_digit = curr_digit
-			pow *= 10
-		// Remove last digit from n
-		n = int(n / 10)
-	return res
-if _name_ == '_main_':
-	n = 12224
-	print(removeRecur(n))        
+//Given a number, separate the odd and even digits of the number without changing the order
+#include<iostream>
+using namespace std;
+int main()
+{
+    int n;int input;int digit;int even=0;int odd=0;int evenp=1;int oddp=1;
+    cin>>n>>input;
+    while(n){
+        digit=n%10;
+        if(digit%2==0){
+            even=even+(digit*evenp);
+            evenp*=10;
+            }
+            else{
+                odd=odd+(digit*oddp);
+                oddp*=10;
+                }
+                n/=10;
+                }
+                if(input==1)
+                cout<<even*oddp+odd<<endl;
+                else
+                cout<<odd*evenp+even<<endl;
+                return 0;
+}
+
+//Given a number check whether its digits are in increasing order or decreasing order or not
+#include<iostream>
+using namespace std;
+int main()
+{
+	int input;
+	cin>>input;
+	int digit1; int digit2;
+	digit1=input%10;
+	input/=10;
+	digit2=input%10;
+	input/=10;
+	if(input<10)
+		cout<<"Not"<<endl;
+	else if(input<100)
+	{
+		if(digit1>digit2)
+			cout<<"Increasing"<<endl;
+		else if(digit1<digit2)
+			cout<<"Decreasing"<<endl;
+		else
+			cout<<"Not"<<endl;
+	}
+	int prev;
+	int curr;
+	if(digit1>digit2)
+	{
+		prev=digit2;
+		while(input)
+		{
+			curr=input%10;
+			if(curr>=prev)
+				break;
+			input/=10;
+			prev=curr;
+		}
+		if(input==0)
+			cout<<"Increasing"<<endl;
+		else
+			cout<<"Not"<<endl;
+	}
+	else if(digit1<digit2){
+		prev=digit2;
+		while(input){
+			curr=input%10;
+			if(curr<=prev)
+				break;
+			input/=10;
+			prev=curr;
+		}
+		if(input==0)
+			cout<<"Decreasing"<<endl;
+		else
+			cout<<"Not"<<endl;
+	}
+	else
+		cout<<"Not"<<endl;
+	return 0;
+}
