@@ -68,10 +68,24 @@ void deletion(node* &head,int pos){
     //edge case
     if(temp->next!=NULL){
         temp->next->prev=temp->prev;
-    }
-    
+    }    
     delete temp;
-    
+}
+
+void reverse(node* &head) {
+    node* temp = NULL;
+    node* current = head;
+
+    while (current != NULL) {
+        temp = current->prev;
+        current->prev = current->next;
+        current->next = temp;
+        current = current->prev;
+    }
+
+    // Update the head to point to the new head of the reversed list
+    if (temp != NULL)
+        head = temp->prev;
 }
 
 int main()
@@ -86,5 +100,6 @@ int main()
     display(head);
     deletion(head,1);
     display(head);
+    reverse(head);
     return 0;
 }
