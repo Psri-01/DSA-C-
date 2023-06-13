@@ -122,3 +122,72 @@ int main()
     }
     return 0;
 }
+
+/*You are required to implement the following Function def LargeSmallSum(arr). 
+
+The function accepts an integers arr of size ’length’ as its arguments you are required to return the sum of second largest largest element from the even positions and second smallest from the odd position of given ‘arr’.
+
+Assumption:
+
+All array elements are unique
+Treat the 0th position a seven
+NOTE
+
+Return 0 if array is empty
+Return 0, if array length is 3 or less than 3
+Example:-
+
+Input
+
+arr:3 2 1 7 5 4
+
+Output
+
+7*/
+#include <bits/stdc++.h>
+using namespace std;
+int Largesum(int *arr,int n){
+    int ans,i,j,temp;
+    int even[n], odd[n];
+    int evencount=0,oddcount=0;
+    if(n<=3)
+    {
+        ans=0;
+    }
+    else{
+        even[0]=arr[0];
+        evencount=1;
+        for(i=1; i<n; i++)
+        {
+            if(i%2==0)
+            {
+                even[evencount]=arr[i];
+                evencount++;
+            }
+            else{
+                odd[oddcount]=arr[i];
+                oddcount++;
+            }
+        }
+        sort(even,even+evencount);
+        sort(odd,odd+oddcount);
+        ans=even[evencount-2]+odd[oddcount-2];
+    }
+    return ans;
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+    
+    int arr[n];
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    
+    int result;
+    result=Largesum(arr,n);
+    cout<<result<<endl;
+    return 0;
+}
