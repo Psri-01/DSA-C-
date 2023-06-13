@@ -128,6 +128,26 @@ int getCount(node* head){
     return count;
 }
 
+void sorting(node* head){
+    node *i,*j;
+    i=head;
+    if(head==NULL){
+        cout<<"The list is empty"<<endl;
+    }
+    else{
+        for(i=head;i!=NULL;i=i->next){
+            for(j=i->next;j!=NULL;j=j->next)
+            {
+                if(i->data>j->data){
+                    int ptr=i->data;
+                    i->data=j->data;
+                    j->data=ptr;
+                }
+            }
+        }
+    }
+}
+
 int main()
 {
     node* head=NULL;
@@ -150,6 +170,8 @@ int main()
     //int k=2;
     //node* newhead=reversek(head,k);
     //display(newhead);
-    cout<<getCount(head)<<endl;
+    //cout<<getCount(head)<<endl;
+    sorting(head);
+    display(head);
     return 0;
 }
