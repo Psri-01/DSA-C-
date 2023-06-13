@@ -117,6 +117,17 @@ node* reversek(node* &head, int k){
     return prevptr; //as prevptr points t/w the new head
 }
 
+int getCount(node* head){
+    node* temp=head;
+    int count=0;
+    while(temp!=NULL)
+    {
+        count=count+1;
+        temp=temp->next;
+    }
+    return count;
+}
+
 int main()
 {
     node* head=NULL;
@@ -136,8 +147,9 @@ int main()
     //node* newhead=reverse(head);
     //node* newhead=reverseRec(head);
     //display(newhead);
-    int k=2;
-    node* newhead=reversek(head,k);
-    display(newhead);
+    //int k=2;
+    //node* newhead=reversek(head,k);
+    //display(newhead);
+    cout<<getCount(head)<<endl;
     return 0;
 }
