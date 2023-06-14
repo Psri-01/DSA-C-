@@ -199,6 +199,16 @@ node* mergeRecursive(node* &head1, node* &head2){
 int main()
 {
     node* head=NULL;
+    /*node* head1=NULL;
+    node* head2=NULL;
+    int arr1[]={1,4,5,7};
+    int arr2[]={2,3,6};
+    for(int i=0;i<4;i++){
+        insertAtTail(head1,arr1[i]);
+    }
+    for(int i=0;i<3;i++){
+        insertAtTail(head2,arr2[i]);
+    }*/
     insertAtTail(head,1);
     insertAtTail(head,2);
     insertAtTail(head,3);
