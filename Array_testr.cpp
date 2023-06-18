@@ -123,6 +123,150 @@ int main()
     return 0;
 }
 
+//given an array a[] of size n, for every i from 0 to n-1 output max(a[0],a[1]...a[i])
+/*approach: keep a variable mx which stores the max till ith element.
+iterate over the array and update;  mx=max(mx,arr[i]) */
+#include<bits/stdc++.h>
+#include<climits>
+using namespace std;
+int main()
+{
+    int mx=INT_MIN;
+    int n;
+    cout<<"Enter the array size: ";
+    cin>>n;
+    int arr[n];
+    cout<<"Enter the array elements: ";
+    for(int i=0;i<n;i++){
+        cin>>arr[i];
+    }
+    for(int i=0;i<n;i++)
+    {
+        mx=max(mx,arr[i]);
+        cout<<mx<<endl;
+    }
+    return 0;
+}
+
+/*Subarray: contiguous part of the array. No of subarrays of an array with n elems = nc2+n=n(n+1)/2.
+Subsequence: a seq that can be derived an array by selection 0 or more elems without changing the order of the remaining elems.
+No of Subsequences of an array with n elems = 2^n.
+Every subarray is a subsequence but every subsequence is not a subarray.*/
+
+//Given an array a[] of size n, output sum of each subarray of the given array.
+/*Approach: iterate over all the subarrays.
+for every i=0 to i=n-1:
+ for every j=i to j=n-1:
+  output sum[i...j]*/
+  
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++){
+    cin>>arr[i];
+    }
+    int curr=0;
+    for(int i=0;i<n;i++){
+        curr=0;
+        for(int j=i;j<n;j++){
+            curr+=arr[j];
+            cout<<curr<<" ";
+        }
+    }
+    return 0;
+}
+
+
+//Length of the longest contiguous arithmetic subarray.
+/*Approach: loop over the array and find teh ans.
+reqd variables: 1) previous common difference (pd)
+2) current arithmetic subarray Length (curr)
+3) max arithmetic subarray Length (ans)
+*/
+  
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    int a[n];
+    for(int i=0;i<n;i++)
+    {
+    cin>>a[i];
+    }
+    int ans=2;
+    int pd=a[1]-a[0];
+    int j=2;
+    int curr=2;
+    while(j<n)
+    {
+        if(pd==a[j]-a[j-1])
+        {
+            curr++;
+        }
+        else
+        {
+            pd=a[j]-a[j-1];
+            curr=2;
+        }
+        ans=max(ans,curr);
+        j++;
+    }
+    cout<<ans<<endl;
+    return 0;
+}
+
+
+/*qn in phone screenshots;
+Approach: Brute force:
+iterate over all the elems and check if its  a record breaking day or not.
+T.N.: to check if a[i] is a record breaking day, we have to iterate over a[0],a[1]...a[i-1].
+Time complexity for this op: O(n)
+Overall time complexity: O(n^2)
+Optimised approach: If we can optimise step 1 then we can optimize our overall solution.
+For step 1: we need to check if a[i]>{a[i-1],a[i-2],...a[0]} which is the same as
+    a[i]>max(a[i-1],a[i-2],...a[0])
+ keep a variable mx which will store the max value till a[i]. Then check
+        a[i]>mx
+        a[i]>a[i+1], (if i+1<n)
+        and update mx, mx=max(mx,a[i])          so step 1 tc=O(1), overall=O(n).
+*/
+  
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n;
+    cin>>n;
+    int a[n+1];
+    a[n]=-1;
+    for(int i=0;i<n;i++)
+    {
+    cin>>a[i];
+    }
+    if(n==1){
+        cout<<"l"<<endl;
+        return 0;
+    }
+    int ans=0;
+    int mx=-1;
+    for(int i=0;i<n;i++)
+    {
+        if(a[i]>mx && a[i]>a[i+1])
+        {
+            ans++;
+        }
+        mx=max(mx,a[i]);
+    }
+    cout<<ans<<endl;
+    return 0;
+}
+
 /*You are required to implement the following Function def LargeSmallSum(arr). 
 
 The function accepts an integers arr of size ’length’ as its arguments you are required to return the sum of second largest largest element from the even positions and second smallest from the odd position of given ‘arr’.
