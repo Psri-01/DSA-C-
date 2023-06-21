@@ -198,3 +198,14 @@ int main()
     cout<<s1<<endl;
     return 0;
 }
+
+#include<bits/stdc++.h>
+#include<string>
+using namespace std;
+int main()
+{
+    string str="americaa";
+    reverse(str.begin(),str.end());
+    cout<<str<<endl;
+    return 0;
+}
