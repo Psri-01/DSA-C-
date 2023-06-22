@@ -209,3 +209,85 @@ int main()
     cout<<str<<endl;
     return 0;
 }
+
+#include<iostream>
+#include<string>
+#include<algorithm>
+using namespace std;
+int main() {
+    string str="iceland";
+    //upper case
+    for(int i=0;i<str.size();i++)
+    {
+        if(str[i]>='a'&&str[i]<='z')
+        str[i]-=32;
+    }
+    cout<<str<<endl;
+    //lower case
+    for(int i=0;i<str.size();i++)
+    {
+        if(str[i]>='A'&&str[i]<='Z')
+        str[i]+=32;
+    }
+    cout<<str<<endl;
+    return 0;
+}
+
+#include<iostream>
+#include<string>
+#include<algorithm>
+using namespace std;
+int main() {
+    string s;
+    getline(cin,s);
+    transform(s.begin(),s.end(),s.begin(),::toupper);
+    cout<<s<<endl;
+    transform(s.begin(),s.end(),s.begin(),::tolower);
+    cout<<s<<endl;
+    return 0;
+}
+
+//form the biggest num from the numeric string
+#include<iostream>
+#include<string>
+#include<algorithm>
+using namespace std;
+int main() {
+    string s;
+    getline(cin,s);
+    sort(s.begin(),s.end(),greater<int>());
+    cout<<s<<endl;
+    return 0;
+}
+
+Py: #output the num of times a char occurs in a string
+str='abdbashdchcabaa'
+c='a'
+print(len(str.split(c))-1)
+
+//output the num of times a char occurs in a string
+#include<iostream>
+#include<string>
+#include<algorithm>
+using namespace std;
+int main() {
+    string s;
+    getline(cin,s);
+    int freq[26];
+    for(int i=0;i<26;i++)
+        freq[i]=0;
+    for(int i=0;i<s.size();i++)
+        freq[s[i]-'a']++;
+    char ans='a';
+    int maxfreq=0;
+    for(int i=0;i<26;i++)
+    {
+        if(freq[i]>maxfreq)
+        {
+            maxfreq=freq[i];
+            ans=i+'a'; //0 a ko represent kr rha hai aur i b ko so ith char-a aur b ko rep kr rha hai
+        }
+    }
+    cout<<maxfreq<<" "<<ans<<endl;
+    return 0;
+}
