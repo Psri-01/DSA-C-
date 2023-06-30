@@ -249,3 +249,86 @@ int main()
     std::cout << removeDup("aaabbbbccccceeeeedd") << std::endl;;
 	return 0;
 }
+//Move all x to the end of the string
+#include <iostream>
+using namespace std;
+string moveallX(string s){
+    if(s.length()==0){
+        return "";
+    }
+    char ch=s[0];
+    string ans = moveallX(s.substr(1));
+    if(ch=='x'){
+        return ans+ch;
+    }
+    return ch+ans;
+}
+
+int main()
+{
+    cout<<moveallX("axxbdxceffxhix");
+    return 0;
+}
+//Generate all the substrings of a string
+#include <iostream>
+using namespace std;
+void subseq(string s, string ans){
+    if(s.length()==0){
+        cout<<ans<<endl;
+        return;
+    }
+    char ch=s[0];
+    string ros=s.substr(1);
+    subseq(ros,ans);
+    subseq(ros,ans+ch);
+}
+
+int main()
+{
+    subseq("ABC","");
+    cout<<endl;
+    return 0;
+}
+//Generate substrings with ASCII number
+#include <iostream>
+using namespace std;
+void subseq(string s, string ans){
+    if(s.length()==0){
+        cout<<ans<<endl;
+        return;
+    }
+    char ch=s[0];
+    int code=ch;
+    string ros=s.substr(1);
+    subseq(ros,ans);
+    subseq(ros,ans+ch);
+    subseq(ros,ans+to_string(code));
+}
+
+int main()
+{
+    subseq("AB","");
+    cout<<endl;
+    return 0;
+}
+//PRINT ALL THE POSSIBLE WORDS FROM PHONE DIGITS
+#include <iostream>
+using namespace std;
+string keypadArr={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+void keypad(string s, string ans){
+    if(s.length()==0){
+        cout<<ans<<endl;
+        return;
+    }
+    char ch=s[0];
+    string code=keypadArr[ch-'0'];  //char to integer
+    string ros=s.substr(1);
+    for(int i=0;i<code.length();i++){
+        keypad(ros,ans+code[i]);
+    }
+}
+int main()
+{
+    keypad("23","");
+    return 0;
+}
