@@ -65,7 +65,7 @@ int main()
 }
 
 N Queen problem
-//permutation is a rearrangement of members of a sequence into a new seq
+
 #include <iostream>
 using namespace std;
 bool isSafe(int** arr, int x, int y, int n){
