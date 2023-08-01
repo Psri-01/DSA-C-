@@ -75,18 +75,22 @@ int main()
         cout<<"2 is a prime no. "<<endl;
     }
   //PRIME WITH BOUNDS
+#include <iostream>
+using namespace std;
+int main()
+{
     int a,b;
     cout<<"Enter the limits: "<<endl;
     cin>>a>>b;
     int i;
-    for(int num=1;num<=b;num++){
+    for(int num=a;num<=b;num++){
         for(i=2;i<num;i++){
             if(num%i==0){
                 break;//as we dont need to print non primes
             } 
         }
         if(i==num){
-            cout<<i<<endl;
+            cout<<i<<" ";
         }
     }
     return 0;
