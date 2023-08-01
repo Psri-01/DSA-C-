@@ -89,7 +89,7 @@ int main()
     cout<<"Enter a no: "<<endl;
     cin>>n;
     int reverse;
-    while(n>10){
+    while(n>=1){
         int lastdigit=n%10;
         reverse=reverse*10+lastdigit;
         n=n/10;
