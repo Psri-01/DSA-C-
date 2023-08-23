@@ -1,4 +1,4 @@
-//cycle detection in directed graph
+// bipartite graph or not
 #include "bits/stdc++.h"
 using namespace std;
 vector<vector<int>> adj;
@@ -21,7 +21,7 @@ void color(int u,int curr){
 }
 
 int main(){
-    int n,m;
+    int n,m;       //n vertices m edges
     cin>>n>>m;
     adj=vector<vector<int>>(n);
     vis=vector<bool>(n,false);
